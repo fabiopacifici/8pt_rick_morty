@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     console.log('Fetch the data');
     // fetch the data with axios
     axios
-      .get('https://rickandmortyapi.com/api/character?page=6')
+      .get('https://rickandmortyapi.com/api/character?page=2')
       .then(res => {
         // log the fetched data
         console.log(res.data.results);
@@ -27,6 +27,8 @@ function App() {
   }
 
 
+  useEffect(fetchData, [])
+
   return (
     <>
 
@@ -42,7 +44,6 @@ function App() {
       </header>
 
       <main>
-        
         <div className="p-5 mb-4 bg-light rounded-3">
           <div className="container py-5">
             <h1 className="display-5 fw-bold">Welcome to the Rick and Morty Universe</h1>
@@ -90,7 +91,6 @@ function App() {
             </div>
           </div>
         </section>
-
 
       </main>
 
