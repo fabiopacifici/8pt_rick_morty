@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 function App() {
   // makle a state variable where store the characters list
   const [characters, setCharacters] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
 
-  function fetchData() {
+  function fetchData(page) {
     console.log('Fetch the data');
     // fetch the data with axios
     axios
-      .get('https://rickandmortyapi.com/api/character?page=2')
+      .get(`https://rickandmortyapi.com/api/character?page=${page}`)
       .then(res => {
         // log the fetched data
         console.log(res.data.results);
@@ -26,8 +27,9 @@ function App() {
 
   }
 
-
-  useEffect(fetchData, [])
+  useEffect(()=>{
+    fetchData(currentPage)
+  }, [])
 
   return (
     <>
