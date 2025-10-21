@@ -1,32 +1,16 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import FavouritesContext from "../contexts/FavouritesContext";
+
 
 export default function CharactersPage() {
 
   // makle a state variable where store the characters list
-  const [characters, setCharacters] = useState([])
+
   const [currentPage, setCurrentPage] = useState(1)
+  const { toggleFavourites, isFavourite, characters, fetchData } = useContext(FavouritesContext)
 
-  function fetchData(page) {
-    console.log('Fetch the data');
-    // fetch the data with axios
-    axios
-      .get(`https://rickandmortyapi.com/api/character?page=${page}`)
-      .then(res => {
-        // log the fetched data
-        console.log(res.data.results);
-        const { info, results } = res.data
-
-        // update the state
-        setCharacters(results)
-
-      })
-      .catch(err => {
-        console.error(err.message);
-      })
-
-  }
 
   useEffect(() => {
     fetchData(currentPage)
@@ -79,12 +63,15 @@ export default function CharactersPage() {
                           </span>
                         </span>
                       </div>
+
+                      <span onClick={() => toggleFavourites(character.id)}>
+                        {isFavourite(character.id) ? '💖' : '🤍'}
+                      </span>
                     </div>
                   </div>
                 </div>
 
               )}
-
 
             </div>
           </div>

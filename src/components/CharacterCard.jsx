@@ -1,4 +1,12 @@
+import { useContext } from "react";
+import FavouritesContext from "../contexts/FavouritesContext";
+
+
+
 export default function CharacterCard({ character }) {
+
+  const { isFavourite, toggleFavourites } = useContext(FavouritesContext)
+
 
   return (
     <div className="character-card card col-12 col-sm-5 col-md-3 mx-auto p-3 text-center justify-content-center align-items-center" data-bs-theme='dark'>
@@ -9,6 +17,10 @@ export default function CharacterCard({ character }) {
       <div>
         Status: {character.status}
       </div>
+
+      <span onClick={() => toggleFavourites(character.id)}>
+        {isFavourite(character.id) ? '💖' : '🤍'} 
+      </span>
 
     </div>
   )

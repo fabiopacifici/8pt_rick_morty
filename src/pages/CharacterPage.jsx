@@ -48,7 +48,7 @@ export default function CharacterPage() {
 
       {character != null ?
         (
-          <CharacterCard character={character} />
+          <CharacterCard  character={character} />
         ) :
         (
           <div className="vh-100 text-center">
